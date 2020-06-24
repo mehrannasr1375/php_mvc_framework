@@ -1,0 +1,29 @@
+{
+
+
+
+
+
+  "Home" : "home",
+
+
+  "Tools" : {
+    "my Tools" : "tools",
+    "my Tools 1" : "tools/1",
+    "my Tools 2" : "tools/2"
+  },
+
+
+  "Google" : "https://www.google.com",
+
+
+  "Login" : "register/login",
+
+
+  "Logout" : "register/logout"
+
+
+
+
+
+}
