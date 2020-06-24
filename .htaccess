@@ -1,6 +1,6 @@
 RewriteEngine  on
 
-RewriteBase    /php_mvc
+RewriteBase    /php_mvc_framework
 
 RewriteCond    %{REQUEST_FILENAME}   !-f
 RewriteCond    %{REQUEST_FILENAME}   !-d

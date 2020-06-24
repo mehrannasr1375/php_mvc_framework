@@ -4,10 +4,12 @@ date_default_timezone_set('Asia/Tehran');
 
 // PUBLIC
 define("DEVELOPING_MODE", "true");
-define("PROOT", '/php_mvc/');
+define("PROOT", '/php_mvc_framework/');
 define("SITE_TITLE", 'php_mvc');
 define("DEFAULT_CONTROLLER", 'Home');
 define("DEFAULT_LAYOUT", 'default');
+define("ACCESS_RESTRICTED", 'Restricted');
+
 
 
 // DATABASE CONFIGURE

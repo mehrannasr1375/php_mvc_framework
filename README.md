@@ -14,9 +14,11 @@ Installation:
 
 3 - rename `config-sample.php` to `config.php` and edit database configurations part inside it with your database data
 
-    Note 1:) if you are using one of the linux distros, maybe you should edit the 'PROOT' constant on `config.php` file with your project root folder name.
+    Note 1:) depending on your operating system, maybe you should edit the 'PROOT' constant on `config.php` file with your project root folder name. Also edit the line which includes `RewriteBase` rule with your project root folder name in .htaccess file.
+
 
     Note 2:) password for all default users is : 123456
+
 
 Error Handling:
 
