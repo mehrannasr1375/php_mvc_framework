@@ -21,7 +21,7 @@ class Model {
     // insert or update model based on `column_names` with table columns attributes
     public function save()
     {
-        $fields = getObjectProperties($this);
+        $fields = Helpers::getObjectProperties($this);
 
         // update or insert ?
         if ($this->id != '')
@@ -128,7 +128,7 @@ class Model {
     {
         $data = new stdClass();
 
-        foreach (getObjectProperties($this) as $column => $value)
+        foreach (Helpers::getObjectProperties($this) as $column => $value)
             $data->{$column} = $value;
 
         return $data;
@@ -142,7 +142,7 @@ class Model {
         if (! empty($params)) {
             foreach ($params as $key => $value)
                 if (property_exists($this, $key))
-                    $this->{$key} = sanitize($value);
+                    $this->{$key} = Helpers::sanitize($value);
             return true;
         }
 

@@ -65,8 +65,8 @@ class Router {
         // determine access levels of user
         if (Session::exists(CURRENT_USER_SESSION_NAME)) {
             $current_user_acls[] = "LoggedIn";
-            if (is_array(currentUser()->acls()))
-                foreach (currentUser()->acls() as $ac)
+            if (is_array(Helpers::currentUser()->acls()))
+                foreach (Helpers::currentUser()->acls() as $ac)
                     $current_user_acls[] = $ac;
         }
 

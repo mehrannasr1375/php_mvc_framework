@@ -55,8 +55,8 @@ class RegisterController extends Controller {
 
     public function logout()
     {
-        if (currentUser())
-            currentUser()->logout();
+        if (Helpers::currentUser())
+            Helpers::currentUser()->logout();
 
         Router::redirect('register/login');
     }
@@ -68,7 +68,7 @@ class RegisterController extends Controller {
         $data = [];
         $validation = new Validate();
         if ($_POST) {
-            $data = sanitize($_POST);
+            $data = Helpers::sanitize($_POST);
             $validation->check($data, [
                 'full_name' => [
                     'display'=>'نام',

@@ -34,7 +34,7 @@ $basket = new stdClass();
 
                 <?php
                 if (Session::exists(CURRENT_USER_SESSION_NAME)) {
-                    echo "<a href='#' class='text-secondary ml-4'>" . currentUser()->username . "</a>";
+                    echo "<a href='#' class='text-secondary ml-4'>" . Helpers::currentUser()->username . "</a>";
                     echo "<a href='" . PROOT . "register/logout' class='text-secondary ml-2'>خروج</a>";
                 }
                 else {

@@ -59,7 +59,7 @@
             <hr>
 
             <!-- submit -->
-            <button id="btn-submit-login" type="submit" class="btn-round-green-rev d-block m-auto"><i class="fa fa-unlock-alt pl-2"></i>ورود</button>
+            <button type="submit" class="btn-round-green-rev d-block m-auto"><i class="fa fa-unlock-alt pl-2"></i>ورود</button>
 
         </form>
     </div>
