@@ -242,9 +242,13 @@ class DB {
         if (array_key_exists('order', $params))
             $order = " ORDER BY " . $params['order'];
 
-        // limit
-        if (array_key_exists('limit', $params))
+        // limit & count
+        if (array_key_exists('limit', $params)) {
             $limit = " LIMIT " . $params['limit'];
+            if (array_key_exists('count', $params))
+                $limit .= " , " . (int)$params['count'];
+        }
+
 
         $sql = "SELECT * FROM {$table}{$condition_str}{$order}{$limit}";
 
