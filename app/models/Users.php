@@ -34,6 +34,8 @@ class Users extends Model {
 
     public function __construct($user = '')
     {
+        // $user = `id` || `username` || ``
+
         $table = 'tbl_users';
         parent::__construct($table);
 
@@ -43,10 +45,16 @@ class Users extends Model {
 
         // set user properties
         if ($user != '') {
-            if (is_int($user))
-                $u = $this->db->findFirst('tbl_users', ['conditions'=>'id=?','bind'=>[$user]], 'Users');
-            else
-                $u = $this->db->findFirst('tbl_users', ['conditions'=>'username=?','bind'=>[$user]], 'Users');
+            if (is_int($user)) // set by id
+                $u = $this->db->findFirst('tbl_users', [
+                    'conditions' => 'id=?',
+                    'bind' => [$user]
+                ], 'Users');
+            else // set by username
+                $u = $this->db->findFirst('tbl_users', [
+                    'conditions' => 'username=?',
+                    'bind' => [$user]
+                ], 'Users');
 
             if ($u)
                 foreach ($u as $key => $value)
@@ -155,6 +163,20 @@ class Users extends Model {
         if (empty($this->acl))
             return false;
         return json_decode($this->acl, true);
+    }
+
+
+
+    public function checkEmailExists($email)
+    {
+        $res = $this->findFirst([
+            'conditions' => ['email = ?'],
+            'bind' => [$email]
+        ]);
+
+        if ($res)
+            return true;
+        return false;
     }
 
 

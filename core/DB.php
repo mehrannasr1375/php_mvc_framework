@@ -14,7 +14,7 @@ class DB {
     private $count = 0;
     private $last_insert_id = null;
 
-        
+
 
     // set instance of PDOStatement class
     private function __construct()

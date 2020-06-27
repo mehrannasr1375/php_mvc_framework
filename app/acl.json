@@ -7,7 +7,7 @@
     "denied" : {},
 
     "Home" : ["*"],
-    "Register" : ["login", "register"],
+    "Register" : ["login", "register", "forget"],
     "Restricted" : ["*"]
 
   },

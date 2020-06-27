@@ -1,15 +1,15 @@
 <?php
 class View extends Controller {
 
-
-
     protected $head;
     protected $body;
     protected $site_title = SITE_TITLE;
     protected $output_buffer;
     protected $layout = DEFAULT_LAYOUT;
     public    $displayErrors = null; // a list of view errors (ul)
+    public    $resultMessage = '';
     public    $post = null; // an array of posted variable with POST method
+
 
 
     public function __construct() {}

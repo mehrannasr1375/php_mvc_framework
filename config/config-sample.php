@@ -9,6 +9,7 @@ define("SITE_TITLE", 'php_mvc');
 define("DEFAULT_CONTROLLER", 'Home');
 define("DEFAULT_LAYOUT", 'default');
 define("ACCESS_RESTRICTED", 'Restricted');
+define("EMAIL_FORGET_MAX_SEND_ATTEMPTS", 5);
 
 
 

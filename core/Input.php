@@ -18,29 +18,6 @@ class Input {
             return self::sanitize($_GET[$input]);
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 
 }

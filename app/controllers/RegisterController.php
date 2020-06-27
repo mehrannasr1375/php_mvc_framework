@@ -139,4 +139,40 @@ class RegisterController extends Controller {
 
 
 
+    public function forget()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $validator = new Validate();
+            $email = Input::get('email');
+            $validator->check($_POST, [
+                'email' => [
+                    'display'=>'ایمیل',
+                    'required'=>true,
+                    'valid_email'=>true
+                ]
+            ], true);
+
+            if ($validator->passed()) {
+                $sent_mails_obj = new SentMails();
+                if ($sent_mails_obj->allowedToSendMail($email)) {
+                    $user = new Users();
+                    if ($user->checkEmailExists($email)) {
+                        $this->view->resultMessage = 'ایمیل حاوی لینک بازیابی رمز عبور به ایمیل شما ارسال گردید!';
+                        // send an email including reset password link
+                    }
+                    else
+                        $validator->addError('کاربری با این ایمیل ثبت نام نکرده است');
+                }
+                else
+                    $validator->addError('حساب کاربری شما موقتا مسدود شده است. لطفا بعدا تلاش نمایید!');
+            }
+
+            $this->view->displayErrors = $validator->displayErrors();
+        }
+
+        $this->view->render('register/forget');
+    }
+
+
+
 }

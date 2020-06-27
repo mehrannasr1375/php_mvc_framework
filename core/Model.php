@@ -1,7 +1,7 @@
 <?php
 class Model {
 
-    protected $db; // PDO connection instance
+    protected $db; // DB class instance
     protected $table;
     protected $model_name; // in CamelCase
     protected $soft_delete = false;
