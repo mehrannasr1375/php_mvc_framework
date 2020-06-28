@@ -50,7 +50,7 @@ class SentMails extends Model
     {
         $time_interval = time() - $this->time_interval;
 
-        $this->db->query('DELETE FROM {$this->table} WHERE `time` > ?', [$time_interval]);
+        $this->db->query("DELETE FROM {$this->table} WHERE `time` > ?", [$time_interval]);
     }
 
 

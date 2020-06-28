@@ -251,7 +251,6 @@ class DB {
 
 
         $sql = "SELECT * FROM {$table}{$condition_str}{$order}{$limit}";
-
         if ($this->query($sql, $bind, $class))
             if (! count($this->result))
                 return false;
