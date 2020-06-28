@@ -14,7 +14,7 @@
         <p class="f-12"> جهت ورود به حساب کاربری خود میتوانید از شماره همراه و یا ایمیل خود بعنوان نام کاربری استفاده نمایید! </p>
         <div style="width:20%;height:3px;background-color:white;margin-bottom:50px;"></div>
         <p class="my-2 d-flex justify-content-center align-items-center f-13"><i class="fa fa-2x fa-question-circle-o ml-3"></i> آیا حساب کاربری ندارید؟ </p>
-        <a href="<?=PROOT?>register" class="btn-round-green mt-3"> ثبت نام </a>
+        <a href="<?=PROOT?>register/register" class="btn-round-green mt-3"> ثبت نام </a>
     </div>
 
     <!-- left-part -->

@@ -18,10 +18,10 @@ class Validate {
     {
         $this->errors = [];
 
-        //csrf check
+        // csrf check
         if ($csrfCheck) {
             $csrf_passed = FormHelper::checkToken($source['csrf_token']);
-            if (!isset($source['csrf_token']) || !$csrf_passed)
+            if (! isset($source['csrf_token']) || !$csrf_passed)
                 $this->addError('خطایی رخ داده است!');
         }
 
@@ -35,6 +35,7 @@ class Validate {
                 }
                 else if (!empty($value)) {
                     switch ($rule_name) {
+
                         case 'min':
                             if (strlen($value) < $rule_value)
                                 $this->addError(["{$display} باید شامل حداقل {$rule_value} کاراکتر باشد !", $item]);
@@ -75,12 +76,21 @@ class Validate {
                         case 'valid_email':
                             if (! filter_var($value, FILTER_VALIDATE_EMAIL)) 
                                 $this->addError(["{$display} یک آدرس ایمیل معتبر نیست !", $item]);
-                            break; 
+                            break;
+
+                        case 'exists':
+                            $table = $rules_arr['exists']['table'];
+                            $column = $rules_arr['exists']['column'];
+                            $value = $rules_arr['exists']['value'];
+                            if (! DB::checkExists($table, $column, $value))
+                                $this->addError([" کاربری با این {$display} وجود ندارد!", $item]);
+                            break;
+
                     }
                 }
             }
         }
-        
+
         if (empty($this->errors))
             $this->passed = true;
         
@@ -91,12 +101,10 @@ class Validate {
 
     public function addError($error)
     {
-        $this->errors[] = $error;
+        if ($error != '')
+            $this->errors[] = $error;
         
-        if (empty($this->errors))
-            $this->passed = true;
-        else
-            $this->passed = false;
+        $this->passed = $this->errors ? false : true;
     }
     
     

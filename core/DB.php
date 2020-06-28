@@ -8,7 +8,7 @@ class DB {
 
     private static $instance = null; // a flag for create only one connection to DB
     private $query; // a place for store prepared statement
-    private $pdo;   // database connection
+    private $pdo; // database connection
     private $error = false;
     private $result;
     private $count = 0;
@@ -158,13 +158,12 @@ class DB {
     {
         $fields_str = '';
         foreach ($fields as $field => $value) {
-            $fields_str .= "`" . $fields . "`=?, ";
+            $fields_str .= "`" . $field . "`=?, ";
             $values[] = $value;
         }
         $fields_str = rtrim($fields_str, ', '); // `field1`=?, `field2`=?, ...
 
         $sql = "update {$table} set {$fields_str} where id={$id}";
-
         $this->query($sql, $values);
 
         if (! $this->error())
@@ -256,6 +255,25 @@ class DB {
                 return false;
 
         return true;
+    }
+
+
+
+    public static function checkExists($table, $field_name, $field_value)
+    {
+        $con = DB::getInstance();
+
+        $table = Helpers::sanitize($table);
+        $field_name = Helpers::sanitize($field_name);
+
+        $sql = "SELECT * FROM {$table} WHERE {$field_name} = ?";
+        $stmt = $con->pdo->prepare($sql);
+        $stmt->bindValue(1, $field_value);
+        $stmt->execute();
+
+        if ($stmt->rowCount())
+            return true;
+        return false;
     }
 
 

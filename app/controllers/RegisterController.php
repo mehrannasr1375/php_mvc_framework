@@ -148,20 +148,25 @@ class RegisterController extends Controller {
                 'email' => [
                     'display'=>'ایمیل',
                     'required'=>true,
-                    'valid_email'=>true
+                    'valid_email'=>true,
+                    'exists'=> [
+                        'table' => 'tbl_users',
+                        'column' => 'email',
+                        'value' => $_POST['email']
+                    ],
                 ]
             ], true);
 
             if ($validator->passed()) {
                 $sent_mails_obj = new SentMails();
                 if ($sent_mails_obj->allowedToSendMail($email)) {
-                    $user = new Users();
-                    if ($user->checkEmailExists($email)) {
+                    $user = new Users($email);
+                    if ($user->updateActivationCode()) {
+                        // sende mail
                         $this->view->resultMessage = 'ایمیل حاوی لینک بازیابی رمز عبور به ایمیل شما ارسال گردید!';
-                        // send an email including reset password link
                     }
                     else
-                        $validator->addError('کاربری با این ایمیل ثبت نام نکرده است');
+                        $validator->addError('خطایی در اطلاعات ورودی وجود دارد!');
                 }
                 else
                     $validator->addError('حساب کاربری شما موقتا مسدود شده است. لطفا بعدا تلاش نمایید!');
@@ -171,6 +176,57 @@ class RegisterController extends Controller {
         }
 
         $this->view->render('register/forget');
+    }
+
+
+
+    public function changepass()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $validator = new Validate();
+            $validator->check($_POST, [
+                'user' => [
+                    'display'=>'شناسه کاربری',
+                    'required'=>true,
+                    'exists'=> [
+                        'table' => 'tbl_users',
+                        'column' => 'id',
+                        'value' => $_POST['user']
+                    ],
+                ],
+                'security_code' => [
+                    'display'=>'کد امنیتی',
+                    'required'=>true
+                ],
+                'password' => [
+                    'display'=>'رمز عبور',
+                    'required'=>true,
+                    'min'=>6
+                ],
+                'password_confirm' => [
+                    'display'=>'تکرار رمز عبور',
+                    'required'=>true,
+                    'min'=>6
+                ]
+            ] , true);
+
+            if ($validator->passed()) {
+                $user = new Users((int)Input::get('user'));
+                if ($user) { // if user exists
+                    if ($user->activation_code == Input::get('security_code')) {
+                        $user->changePassword(Input::get('password'));
+                        $this->view->resultMessage = 'رمز عبور شما با موفقیت تغییر یافت.' . '<a class="mr-2 btn-round-green-rev" href="' . PROOT . 'register/login">ورود</a>';
+                    }
+                    else
+                        $validator->addError('درخواست معتبر نیست!');
+                }
+                else // if user not exists
+                    $validator->addError('چنین کاربری موجود نمی باشد!');
+            }
+            $this->view->displayErrors = $validator->displayErrors();
+        }
+
+        $this->view->render('register/change_password');
     }
 
 

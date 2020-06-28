@@ -47,12 +47,17 @@ class Users extends Model {
         if ($user != '') {
             if (is_int($user)) // set by id
                 $u = $this->db->findFirst('tbl_users', [
-                    'conditions' => 'id=?',
+                    'conditions' => 'id = ?',
                     'bind' => [$user]
                 ], 'Users');
             else // set by username
                 $u = $this->db->findFirst('tbl_users', [
-                    'conditions' => 'username=?',
+                    'conditions' => 'username = ?',
+                    'bind' => [$user]
+                ], 'Users');
+            if (! $u) //set by email
+                $u = $this->db->findFirst('tbl_users', [
+                    'conditions' => 'email = ?',
                     'bind' => [$user]
                 ], 'Users');
 
@@ -70,6 +75,22 @@ class Users extends Model {
             'conditions' => ['username = ?'],
             'bind' => [$username]
         ]);
+    }
+
+
+
+    public function findByEmail($email)
+    {
+        $user = $this->findFirst([
+            'conditions' => ['email = ?'],
+            'bind' => [$email]
+        ]);
+
+        //$this->assign($user);
+
+        if ($user->id != '')
+            return true;
+        return false;
     }
 
 
@@ -158,6 +179,15 @@ class Users extends Model {
 
 
 
+    public function updateActivationCode()
+    {
+        return $this->update([
+            'activation_code' => rand(111111, 999999)
+        ]);
+    }
+
+
+
     public function acls()
     {
         if (empty($this->acl))
@@ -177,6 +207,33 @@ class Users extends Model {
         if ($res)
             return true;
         return false;
+    }
+
+
+
+    public static function checkIdExists($id)
+    {
+        $con = DB::getInstance();
+
+        $res = $con->findFirst('tbl_users', [
+            'conditions' => ['id = ?'],
+            'bind' => [$id]
+        ]);
+
+        if ($res)
+            return true;
+        return false;
+    }
+
+
+
+    public function changePassword($new_password)
+    {
+        $hashed_pass = password_hash($new_password, PASSWORD_DEFAULT);
+
+        return $this->update([
+            'password' => $hashed_pass
+        ]);
     }
 
 

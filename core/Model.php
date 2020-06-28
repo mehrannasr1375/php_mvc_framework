@@ -91,12 +91,13 @@ class Model {
 
 
 
-    public function update($id, $params = [])
+    public function update($fields = [])
     {
-        if (empty($params) || $id == '')
+        if ($this->id == '' || empty($fields))
             return false;
 
-        $this->db->update($this->table, $id, $params);
+        if ($this->db->update($this->table, $this->id, $fields))
+            return true;
     }
 
 
@@ -141,8 +142,9 @@ class Model {
     {
         if (! empty($params)) {
             foreach ($params as $key => $value)
-                if (property_exists($this, $key))
-                    $this->{$key} = Helpers::sanitize($value);
+                if (property_exists($this, $key)) {
+                    $this->{$key} = @Helpers::sanitize($value);
+                }
             return true;
         }
 
