@@ -3,10 +3,7 @@
 
 
 <?php $this->start('body'); ?>
-
-<!-- content ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <div id="signup-con" class="container">
-
 
     <!-- top-part -->
     <div class="signup-top">
@@ -18,21 +15,17 @@
         <p class="f-12 mb-0"> کاربر گرامی، لطفا جهت ثبت نام در سایت، فرم زیر را با دقت پر کرده و روی دکمه ثبت کلیک نمایید: </p>
     </div>
 
-
     <!-- general errors -->
     <div class="register-res">
         <?= $this->displayErrors; ?>
     </div>
 
-
     <!-- form -->
     <form method="POST" action="<?=PROOT?>register/register" class="p-4">
-
+      
         <div class="row">
 
-            <div class="col-12 col-lg-6 px-5">
-                <small class="text-secondary">مشخصات فردی :</small>
-                <hr class="mt-1 mb-5">
+            <div class="col-6 m-auto">
 
                 <!-- csrf -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
                 <?= FormHelper::csrfInput(); ?>
@@ -67,43 +60,6 @@
                 <div class="invalid-feedback pr-3"></div>
             </div>
 
-            <div class="col-12 col-lg-6 px-5">
-                <small class="text-secondary">مشخصات مکانی :</small>
-                <hr class="mt-1 mb-5">
-
-                <!-- province -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-                <label> استان : <span class="text-danger">*</span></label>
-                <select name="province" id="slc_province" class="form-control mr-3">
-                    <option value="" style="color:lightgray!important">لطفا استان خود را انتخاب نمایید</option>
-                </select>
-                <div class="invalid-feedback pr-3"></div>
-
-                <!-- city ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-                <label> شهر : <span class="text-danger">*</span></label>
-                <select name="township" id="slc_township" class="form-control mr-3">
-                    <option value="" style="color:lightgray !important;">لطفا شهرستان خود را انتخاب نمایید</option>
-                </select>
-                <div class="invalid-feedback pr-3"></div>
-
-                <!-- postal_code --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-                <label> کد پستی : <span class="text-danger">*</span></label>
-                <input type="text" class="form-control text-center mr-3" name="postal_code" value="<?= @$this->post['postal_code'] ?>">
-                <div class="invalid-feedback pr-3"></div>
-
-                <!-- address ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
-                <label> آدرس : <span class="text-danger">*</span></label>
-                <textarea name="address" class="form-control text-right mr-3" rows="5"><?= @$this->post['address'] ?></textarea>
-                <div class="invalid-feedback pr-3"></div>
-
-                <!-- pament_type ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-                <label class="ml-3">نوع پرداخت : </label>
-                <select name="payment_type" class="form-control mr-3">
-                    <option value="pay">Pay</option>
-                    <option value="melat" selected>درگاه پرداخت ملت</option>
-                    <option value="shaparak" selected>درگاه پرداخت شاپرک</option>
-                </select>
-            </div>
-
         </div>
 
         <!-- aggreement ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -120,9 +76,7 @@
 
     </form>
 
-
 </div>
-
 <?php $this->end(); ?>
 
 

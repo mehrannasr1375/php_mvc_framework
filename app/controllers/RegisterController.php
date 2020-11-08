@@ -100,26 +100,6 @@ class RegisterController extends Controller {
                     'display'=>'تکرار رمز عبور',
                     'required'=>true,
                 ],
-                'province' => [
-                    'display'=>'استان',
-                    'required'=>true
-                ],
-                'township' => [
-                    'display'=>'شهر',
-                    'required'=>true
-                ],
-                'postal_code' => [
-                    'display'=>'کد پستی',
-                    'required'=>true
-                ],
-                'address' => [
-                    'display'=>'آدرس',
-                    'required'=>true
-                ],
-                'payment_type' => [
-                    'display'=>'نوع پرداخت',
-                    'required'=>true
-                ],
                 'accept_rules' => [
                     'display'=>'پذیرش مقررات',
                     'required'=>true

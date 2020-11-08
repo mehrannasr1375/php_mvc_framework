@@ -5,56 +5,42 @@
 
 
 <?php $this->start('body'); ?>
-
-<!--  login form  ----------------------------------------------------------------------------------------------------------------------------------------------------->
-<div class="login-form-con container row m-auto">
+<div class="two-part-box">
 
     <!-- right-part -->
-    <div class="login-right col-12 col-md-4">
-        <p class="f-12"> آدرس ایمیلی که با آن در وبسایت ثبتنام کرده اید را وارد نمایید </p>
-        <div style="width:20%;height:3px;background-color:white;margin-bottom:50px;"></div>
-        <p class="my-2 d-flex justify-content-center align-items-center f-13"><i class="fa fa-2x fa-question-circle-o ml-3"></i> آیا حساب کاربری ندارید؟ </p>
-        <a href="<?=PROOT?>register/register" class="btn-round-green mt-3">ثبتنام </a>
+    <div class="two-part-right col-12 col-md-4">
+        آدرس ایمیلی که با آن در وب سایت ثبت نام کرده اید را وارد نمایید :
     </div>
 
     <!-- left-part -->
-    <div class="login-left col-12 col-md-8">
-        <form method="POST" action="<?=PROOT?>register/forget" class="w-50 m-auto">
-
-            <!-- csrf -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="two-part-left col-12 col-md-8">
+        <form method="POST" action="<?=PROOT?>register/forget">
             <?= FormHelper::csrfInput(); ?>
+            <p class="two-part-left-header"> فراموشی کلمه عبور </p>
+            <div class="two-part-left-body">
+                
+                <!-- email -->
+                <div class="scalable-input-wrapper validate-input mt-5 mb-0">
+                    <input id="email" name="email" type="text" class="scalable-input" autocomplete="off">
+                    <span class="scalable-input-title" data-placeholder="آدرس ایمیل"></span>
+                </div>      
+                
+                <!-- errors -->
+                <small class="login-res">
+                    <?= $this->displayErrors; ?>
+                </small>
+                <small class="form-res">
+                    <?= $this->resultMessage; ?>
+                </small>
 
-            <!-- title -->
-            <span class="d-flex p-3 justify-content-center align-items-center font-weight-bold" style="color:rgb(66,166,100);">
-                <i class="fa pl-2 fa-comment-o"></i>فراموشی کلمه عبور
-            </span>
-            <div style="width:20%;height:4px;background-color:rgb(66,166,100); margin:auto"></div>
-
-            <!-- result message -->
-            <small class="login-res">
-                <?= $this->displayErrors; ?>
-            </small>
-            <small class="form-res">
-                <?= $this->resultMessage; ?>
-            </small>
-
-            <!-- username -->
-            <div class="form-group mt-4">
-                <label>آدرس ایمیل : </label>
-                <input type="email" class="form-control text-center" name="email" value="test@test.com" placeholder="test@gmail.com" autocomplete="off" >
             </div>
-
-            <hr>
-
-            <!-- submit -->
-            <button type="submit" class="btn-round-green-rev d-block m-auto"><i class="fa fa-comment-o pl-2"></i>ارسال ایمیل</button>
-
+            <div class="two-part-left-footer mt-4">
+                <button type="submit" class="btn-round-green-rev d-block m-auto mt-5"><i class="fa fa-comment-o pl-2"></i>ارسال ایمیل</button>
+            </div>
         </form>
     </div>
 
 </div>
-<!--  /login form  ----------------------------------------------------------------------------------------------------------------------------------------------------->
-
 <?php $this->end(); ?>
 
 
